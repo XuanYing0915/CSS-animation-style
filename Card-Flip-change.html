@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: grid;
+            place-content: center;
+            overflow-x: hidden;
+        }
+
+        .container>img {
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+            border-radius: 0.4rem;
+            object-fit: cover;
+        }
+
+        .container {
+            display: grid;
+            width: 50%;
+            justify-self: center;
+        }
+
+        .container>img {
+            grid-area: 1 / 1;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            border: 1px solid #555;
+            object-fit: cover;
+        }
+
+        .container>img:nth-child(1) {
+            animation: img1ToUp 1s forwards;
+        }
+
+        .container>img:nth-child(2) {
+            animation: img2ToBottom 1s forwards;
+        }
+
+        @keyframes img1ToUp {
+            0% {
+                transform: translate(-40%, -40%) scale(1);
+                filter: blur(2px);
+            }
+
+            35%,
+            65% {
+                transform: translate(-80%, -40%) scale(1.2) skew(2deg);
+                z-index: 2;
+            }
+
+            100% {
+                z-index: 2;
+                transform: translate(-30%, -30%) scale(1.4);
+            }
+        }
+
+        @keyframes img2ToBottom {
+            0% {
+                transform: translate(30%, 30%) scale(1.4);
+            }
+
+            35%,
+            65% {
+                transform: translate(80%, 40%) scale(1.2) skew(-2deg);
+            }
+
+            100% {
+                transform: translate(40%, 40%) scale(1);
+                filter: blur(2px);
+            }
+        }
+
+        .container.active>img:nth-child(1) {
+            animation: img1ToBottom 1s forwards;
+        }
+
+        .container.active>img:nth-child(2) {
+            animation: img2ToUp 1s forwards;
+        }
+
+        @keyframes img1ToBottom {
+            0% {
+                transform: translate(-30%, -30%) scale(1.4);
+                z-index: 2;
+            }
+
+            35%,
+            65% {
+                transform: translate(-80%, -40%) scale(1.2) skew(2deg);
+                z-index: 2;
+            }
+
+            100% {
+                transform: translate(-40%, -40%) scale(1);
+                filter: blur(2px);
+            }
+        }
+
+        @keyframes img2ToUp {
+            0% {
+                transform: translate(40%, 40%) scale(1);
+                filter: blur(2px);
+            }
+
+            35%,
+            65% {
+                transform: translate(80%, 40%) scale(1.2) skew(-2deg);
+            }
+
+            100% {
+                transform: translate(30%, 30%) scale(1.4);
+            }
+        }
+
+        .container>img {
+            transition: 1s;
+
+        }
+
+        .container>img:hover {
+            scale: 1.1;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="https://xin.18183.com/uploads/230424/66-23042412110D57.jpg" />
+        <img
+            src="https://thumbor.4gamers.com.tw/K1wptQKcgbSO-INMz2wqTTU35Jc=/800x0/filters:extract_cover():no_upscale():quality(80):format(jpeg):background_color(FFFFFF)/https%3A%2F%2Fimg.4gamers.com.tw%2Fckfinder%2Fimages%2FPanda%2Fwriter%2F20233rd%2F230830_danh%20%281%29.png%3FversionId%3DdfsJQKczLze30O_DAGBc8nvItia_LCYG" />
+    </div>
+
+
+
+    <script>
+        const img1 = document.querySelector(".container > img:nth-child(1)")
+        const img2 = document.querySelector(".container > img:nth-child(2)")
+
+        function addChangeEffect (dom) {
+            const container = document.querySelector(".container")
+            dom.addEventListener("click", () => {
+                container.classList.toggle("active")
+            })
+        }
+
+        addChangeEffect(img1)
+        addChangeEffect(img2);
+    </script>
+</body>
+
+</html>
